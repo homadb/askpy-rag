@@ -1,3 +1,4 @@
 # Ignore virtual environments
 ragenv/
 .env
+data/
