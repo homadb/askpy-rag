@@ -1,0 +1,11 @@
+# Core dependencies
+langchain
+chromadb
+openai
+tiktoken
+PyMuPDF
+python-dotenv
+
+# Optional (for notebooks and testing)
+ipykernel
+jupyter
