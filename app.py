@@ -24,10 +24,11 @@ embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L
 vectordb = Chroma(persist_directory=persist_dir, embedding_function=embedding)
 
 # ✅ Create retrieval QA chain
-retriever = vectordb.as_retriever(search_kwargs={"k": 2})
+retriever = vectordb.as_retriever(search_kwargs={"k": 1})
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
     retriever=retriever,
+    chain_type="map_reduce",  # 🔥 safer for long contexts
     return_source_documents=True
 )
 
