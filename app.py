@@ -22,7 +22,7 @@ llm = Together(
 )
 
 # ✅ Load vector DB
-persist_dir = "../db"
+persist_dir = "db"
 embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 vectordb = Chroma(persist_directory=persist_dir, embedding_function=embedding)
 
