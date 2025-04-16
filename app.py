@@ -13,12 +13,9 @@ together_api_key = os.getenv("TOGETHER_API_KEY")
 
 # ✅ Set up LLM
 llm = Together(
-    model="mistralai/Mistral-7B-Instruct-v0.1",
+    model="mistralai/Mixtral-8x7B-Instruct-v0.1",  # or "Qwen/Qwen1.5-14B-Chat"
     temperature=0.7,
-    top_k=50,
-    top_p=0.95,
-    repetition_penalty=1.1,
-    together_api_key=together_api_key,
+    together_api_key=together_api_key
 )
 
 # ✅ Load vector DB
