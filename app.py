@@ -27,17 +27,18 @@ embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L
 vectordb = Chroma(persist_directory=persist_dir, embedding_function=embedding)
 
 # ✅ Create retrieval QA chain
+retriever = vectordb.as_retriever(search_kwargs={"k": 3})
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
-    retriever=vectordb.as_retriever(),
+    retriever=retriever,
     return_source_documents=True
 )
 
 # ✅ Streamlit UI
-st.set_page_config(page_title="RAG Chat on PDFs", layout="centered")
-st.title("📚 RAG Chat – Ask Your PDFs!")
+st.set_page_config(page_title="AskPy Chat", layout="centered")
+st.title("📚 AskPy Chat – Ask about Python!")
 
-query = st.text_input("Ask a question about your documents:")
+query = st.text_input("Ask a question:")
 
 if query:
     with st.spinner("💬 Thinking..."):
