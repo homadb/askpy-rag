@@ -1,11 +1,20 @@
-# Core dependencies
+# 🌐 Core RAG Dependencies
 langchain
+langchain-community
+langchain-huggingface
 chromadb
 openai
 tiktoken
 PyMuPDF
 python-dotenv
+sentence-transformers
 
-# Optional (for notebooks and testing)
+# 💬 Together.ai LLM Integration
+together
+
+# 🖥️ Streamlit App UI
+streamlit
+
+# 🧪 Optional: Notebook + Dev Tools
 ipykernel
 jupyter
