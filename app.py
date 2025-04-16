@@ -42,12 +42,19 @@ query = st.text_input("Ask a question:")
 
 if query:
     with st.spinner("💬 Thinking..."):
-        result = qa_chain(query)
-        st.markdown(f"### 📖 Answer:\n{result['result']}")
+        try:
+            result = qa_chain(query)
+            st.markdown(f"### 📖 Answer:\n{result['result']}")
 
-        # Show sources (optional)
-        st.markdown("---")
-        st.markdown("#### 🔍 Sources")
-        for doc in result['source_documents']:
-            st.markdown(f"• `{doc.metadata.get('source', 'Unknown')}`")
-            st.markdown(f"> {doc.page_content[:200]}...")
+            # Show sources (optional)
+            st.markdown("---")
+            st.markdown("#### 🔍 Sources")
+            for doc in result['source_documents']:
+                st.markdown(f"• `{doc.metadata.get('source', 'Unknown')}`")
+                st.markdown(f"> {doc.page_content[:200]}...")
+
+        except ValueError as e:
+            st.error("❌ Error while generating response.")
+            st.code(str(e))
+            st.info("Try a shorter or simpler question — the context may be too long for the Together.ai model.")
+
