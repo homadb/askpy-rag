@@ -7,6 +7,12 @@ from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 from langchain_ollama import OllamaLLM
 
+import os
+
+# Disable Streamlit file watcher on libraries
+os.environ["STREAMLIT_WATCH_FILE_SYSTEM"] = "false"
+
+
 # ✅ Set up LLM
 llm = OllamaLLM(
     model="mistral",
