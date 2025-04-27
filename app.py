@@ -1,13 +1,11 @@
 import os
 from dotenv import load_dotenv
 import streamlit as st
-from langchain_community.llms import Ollama
-
 
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
-from langchain_community.llms import Together
+from langchain_community.llms import Ollama
 
 # ✅ Load env variables
 load_dotenv()
