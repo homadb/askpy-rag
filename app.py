@@ -12,10 +12,9 @@ load_dotenv()
 together_api_key = os.getenv("TOGETHER_API_KEY")
 
 # ✅ Set up LLM
-llm = Together(
-    model="mistralai/Mixtral-8x7B-Instruct-v0.1",  # or "Qwen/Qwen1.5-14B-Chat"
-    temperature=0.7,
-    together_api_key=together_api_key
+llm = Ollama(
+    model="mistral",   # or "llama2", "gemma", etc. depending on what model you pulled
+    temperature=0.7
 )
 
 # ✅ Load vector DB
