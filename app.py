@@ -5,11 +5,11 @@ import streamlit as st
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
-from langchain_community.llms import Ollama
+from langchain_ollama import OllamaLLM
 
 # ✅ Set up LLM
-llm = Ollama(
-    model="mistral",   # or "llama2", "gemma", etc. depending on what model you pulled
+llm = OllamaLLM(
+    model="mistral",
     temperature=0.7
 )
 
