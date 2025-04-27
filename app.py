@@ -7,10 +7,6 @@ from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 from langchain_community.llms import Ollama
 
-# ✅ Load env variables
-load_dotenv()
-together_api_key = os.getenv("TOGETHER_API_KEY")
-
 # ✅ Set up LLM
 llm = Ollama(
     model="mistral",   # or "llama2", "gemma", etc. depending on what model you pulled
