@@ -1,127 +1,114 @@
-📚 AskPy RAG — Chat with Your Python PDFs!
-Build your own offline RAG (Retrieval-Augmented Generation) app to chat with your personal books and tutorials! 🚀
+# 🧠 AskPy RAG
 
-🛠 Tech Stack
+AskPy RAG is a local Python application that lets you chat with your own PDF documents using Retrieval-Augmented Generation (RAG).
 
-Part	Technology
-Frontend	Streamlit
-Embedding Model	HuggingFace sentence-transformers/all-MiniLM-L6-v2
-Vector Database	ChromaDB
-LLM (Local Model)	Ollama (e.g., Llama3, Mistral, Phi3)
-Framework	LangChain
-Environment	Python 3.12 + venv
-🏗️ Project Structure
-bash
-Copy
-Edit
-askpy-rag/
-│
-├── app.py                  # Main Streamlit app (chat interface)
-├── notebooks/               # Helper notebooks
-│    ├── 01_pdf_to_db.ipynb     # Process PDFs ➔ Chunks ➔ Embeddings ➔ Vector DB
-│    └── 02_chat_with_rag.ipynb # Optional: manual chat testing notebook
-│
-├── data/                    # Data folder
-│    └── tutorials/           # (Important!) Place your PDFs here
-│
-├── db/                      # Chroma vector DB (auto-created after embedding)
-│
-├── .env                     # Your API keys and environment configs
-├── .gitignore               # Exclude venv/, db/, etc.
-├── requirements.txt         # Project dependencies
-└── README.md                # This file
-🚀 How to Run the Project
-1. Install Ollama
-Download and install from: ollama.ai
+Built with Streamlit, LangChain, ChromaDB, HuggingFace embeddings, and Ollama.
+Run everything locally on your laptop! 🚀
 
-Then pull a local LLM model (example: Llama3):
+## 📦 Installation
 
-bash
-Copy
-Edit
-ollama pull llama3
-(You can also pull lighter models like phi3, mistral, etc.)
+Use the package manager pip to install all required libraries.
 
-2. Set up the Environment
-bash
-Copy
-Edit
-python -m venv venv
-# activate venv
-# (Linux/macOS)
-source venv/bin/activate
-# (Windows)
-venv\Scripts\activate
-
-# install Python libraries
+```bash
 pip install -r requirements.txt
-3. Prepare the Vector Database
-⚡ Important Step:
+```
 
-Create a data/tutorials/ folder manually inside your project (if not already created).
+You also need to install Ollama locally and pull a model:
 
-Upload your PDFs into the data/tutorials/ folder.
+```bash
+ollama pull llama3
+```
 
-bash
-Copy
-Edit
+## 🛠️ Usage
+
+Prepare your project structure like this:
+
+```bash
+askpy-rag/
+├── app.py
+├── notebooks/
+│    ├── 01_pdf_to_db.ipynb
+│    └── 02_chat_with_rag.ipynb
+├── data/
+│    └── tutorials/
+│        ├── your_pdf_file1.pdf
+│        └── your_pdf_file2.pdf
+├── db/
+├── .env
+├── .gitignore
+├── requirements.txt
+└── README.md
+```
+
+## 📂 1. Upload PDFs
+Create a folder:
+
+```bash
+data/tutorials/
+```
+
+Upload your PDF files inside it.
+
+Example:
+
+```bash
 data/
 └── tutorials/
-     ├── python_book.pdf
-     ├── python_advanced_guide.pdf
-     └── ...
-Then:
+    ├── python_guide.pdf
+    ├── machine_learning_basics.pdf
+```
 
-Run the notebook notebooks/01_pdf_to_db.ipynb
+## ⚙️ 2. Generate Vector Database
 
-It will:
+Run the following notebook to create your ChromaDB vector store:
 
-Extract text
+```bash
+cd notebooks/
+# Open and run 01_pdf_to_db.ipynb
+```
+✅ This extracts text, chunks it, embeds it, and saves it into db/.
 
-Split into chunks
+## 🚀 3. Launch the App
+From the project root:
 
-Embed chunks
-
-Save into ChromaDB (db/ folder)
-
-4. Launch the Chat App
-bash
-Copy
-Edit
+```bash
 streamlit run app.py
-✅ The app will open at: http://localhost:8501
+```
+Open your browser and visit:
+http://localhost:8501
+Now you can chat with your own PDFs! 🎯
 
-🧠 How It Works
-PDFs ➔ Split into small readable chunks.
+## 📚 How It Works
 
-Chunks ➔ Embedded into dense vectors (meaning-based representations).
+PDFs are split into small text chunks.
 
-Saved into Chroma Vector Database.
+Each chunk is converted into vector embeddings.
+
+Vectors are stored in ChromaDB.
 
 When you ask a question:
 
-Query ➔ Embedded ➔ Best matching chunks retrieved.
+It is embedded.
 
-Context ➔ Sent to Ollama (local LLM) ➔ Answer generated.
+Relevant chunks are retrieved.
 
-💬 Result: You can "talk" to your books easily!
+Ollama generates an answer based on your documents.
 
-📈 Future Improvements
-Fine-tune chunk size for better performance
+## 🙌 Contributing
 
-Optimize retrieval settings (k, similarity_score_threshold)
+Pull requests are welcome!
+For major changes, please open an issue first to discuss what you want to improve.
 
-Support multi-document answers
+Make sure to update the docs and tests as needed.
 
-Improve UI/UX with chat history and reset button
+## 📄 License
 
-Deploy on private server / LAN network
-
-📜 License
 This project is licensed under the MIT License.
-Feel free to use, modify, and build upon it! ❤️
 
-🚀 Ready to Build Your Own Local RAG Assistant?
-Let's do it together! 🌟
+## ✨ Notes
 
-⭐️ Star the Repo If You Like It!
+You must manually create a data/tutorials/ folder and upload your PDFs before running.
+
+Ollama must be running locally.
+
+HuggingFace model (all-MiniLM-L6-v2) will be automatically downloaded on first run.
