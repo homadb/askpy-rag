@@ -1,7 +1,7 @@
 ✅ Phase 1: Improvement Plan Overview
 
 🔧 Core Improvements
-- [ ] Speed up LLM responses
+- [x] Speed up LLM responses
 - [ ] Limit or summarize long context chunks
 - [ ] Add loading indicator / spinner in Streamlit
 - [ ] Enable multi-turn conversation (chat history)
