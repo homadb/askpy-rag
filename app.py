@@ -51,10 +51,8 @@ if query:
             short_docs = [doc.copy(update={"page_content": doc.page_content[:MAX_CHARS]}) for doc in docs]
 
             # Run the QA chain
-            result = qa_chain.invoke({
-                "input_documents": short_docs,
-                "question": query
-            })
+            result = qa_chain.invoke({"query": query})
+
 
             # ✅ Show result
             st.success("✅ Done!")
