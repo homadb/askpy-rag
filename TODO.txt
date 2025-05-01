@@ -3,7 +3,7 @@
 🔧 Core Improvements
 - [x] Speed up LLM responses
 - [x] Limit or summarize long context chunks
-- [ ] Add loading indicator / spinner in Streamlit
+- [x] Add loading indicator / spinner in Streamlit
 - [ ] Enable multi-turn conversation (chat history)
 - [ ] Switch to newer LangChain modules (langchain_ollama, langchain_chroma, etc.)
 
