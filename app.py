@@ -42,18 +42,30 @@ query = st.text_input("Ask a question:")
 if query:
     with st.spinner("💬 Thinking..."):
         try:
-            result = qa_chain(query)
+            # Step 1: Manually retrieve relevant documents
+            docs = retriever.get_relevant_documents(query)
+
+            # Step 2: Truncate long chunks
+            MAX_CHARS = 500
+            short_docs = [doc.copy(update={"page_content": doc.page_content[:MAX_CHARS]}) for doc in docs]
+
+            # Step 3: Call LLM with shorter docs
+            result = qa_chain.invoke({
+                "input_documents": short_docs,
+                "question": query
+            })
+
+            # Step 4: Display the answer
             st.markdown(f"### 📖 Answer:\n{result['result']}")
 
             # Show sources (optional)
             st.markdown("---")
             st.markdown("#### 🔍 Sources")
-            for doc in result['source_documents']:
+            for doc in short_docs:
                 st.markdown(f"• `{doc.metadata.get('source', 'Unknown')}`")
                 st.markdown(f"> {doc.page_content[:200]}...")
 
         except ValueError as e:
             st.error("❌ Error while generating response.")
             st.code(str(e))
-            st.info("Try a shorter or simpler question — the context may be too long for the Together.ai model.")
-
+            st.info("Try a shorter or simpler question — the context may be too long.")
