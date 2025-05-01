@@ -40,25 +40,27 @@ st.title("📚 AskPy Chat – Ask about Python!")
 query = st.text_input("Ask a question:")
 
 if query:
-    with st.spinner("💬 Thinking..."):
+    st.markdown("⏳ **Processing your question... please wait.**")
+
+    with st.spinner("💡 Thinking hard..."):
         try:
-            # Step 1: Manually retrieve relevant documents
             docs = retriever.get_relevant_documents(query)
 
-            # Step 2: Truncate long chunks
+            # Truncate long context chunks
             MAX_CHARS = 500
             short_docs = [doc.copy(update={"page_content": doc.page_content[:MAX_CHARS]}) for doc in docs]
 
-            # Step 3: Call LLM with shorter docs
+            # Run the QA chain
             result = qa_chain.invoke({
                 "input_documents": short_docs,
                 "question": query
             })
 
-            # Step 4: Display the answer
+            # ✅ Show result
+            st.success("✅ Done!")
             st.markdown(f"### 📖 Answer:\n{result['result']}")
 
-            # Show sources (optional)
+            # ✅ Show sources
             st.markdown("---")
             st.markdown("#### 🔍 Sources")
             for doc in short_docs:
@@ -68,4 +70,4 @@ if query:
         except ValueError as e:
             st.error("❌ Error while generating response.")
             st.code(str(e))
-            st.info("Try a shorter or simpler question — the context may be too long.")
+            st.info("Try a shorter or simpler question.")
