@@ -15,7 +15,7 @@ os.environ["STREAMLIT_WATCH_FILE_SYSTEM"] = "false"
 
 # ✅ Set up LLM
 llm = OllamaLLM(
-    model="mistral",
+    model="llama2",
     temperature=0.7
 )
 
@@ -25,7 +25,7 @@ embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L
 vectordb = Chroma(persist_directory=persist_dir, embedding_function=embedding)
 
 # ✅ Create retrieval QA chain
-retriever = vectordb.as_retriever(search_kwargs={"k": 1})
+retriever = vectordb.as_retriever(search_kwargs={"k": 3})
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
     retriever=retriever,
