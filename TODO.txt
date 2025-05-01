@@ -16,3 +16,7 @@
 - [ ] 🔐 Switch Between LLMs (Ollama / OpenAI / Together.ai) from a dropdown menu.
 - [ ] 🖼️ Light/Dark theme toggle in Streamlit
 - [ ] 📝 Chat export to text/markdown file
+
+
+✨ Learning
+- [ ] Enable multi-turn conversation (chat history)
