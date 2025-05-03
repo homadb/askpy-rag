@@ -24,6 +24,7 @@ llm = OllamaLLM(
 persist_dir = "db"
 embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 vectordb = Chroma(persist_directory=persist_dir, embedding_function=embedding)
+model_kwargs={"device": "cpu"}  # 👈 Force CPU
 
 # Check if the vector database directory exists
 if not os.path.exists(persist_dir):
@@ -78,14 +79,20 @@ if query:
 
             # ✅ Show result
             st.success("✅ Done!")
-            st.markdown(f"### 📖 Answer:\n{result['result']}")
+            st.markdown(f"### 📖 Answer:\n{result['answer']}")
 
             # ✅ Show sources
             st.markdown("---")
             st.markdown("#### 🔍 Sources")
             for doc in short_docs:
-                st.markdown(f"• `{doc.metadata.get('source', 'Unknown')}`")
-                st.markdown(f"> {doc.page_content[:200]}...")
+                source = doc.metadata.get("source", "Unknown")
+                content = doc.page_content.strip()
+
+                if len(content) < 30 or not content.replace(" ", "").isalnum():
+                    continue  # Skip empty/garbage chunks
+
+                st.markdown(f"• `{source}`")
+                st.markdown(f"> {content[:200]}...")
 
         except ValueError as e:
             st.error("❌ Error while generating response.")
