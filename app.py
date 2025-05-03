@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import streamlit as st
 
 from langchain_chroma import Chroma
-from langchain_ollama import Ollama
+from langchain_community.llms import Ollama
 from langchain_huggingface import HuggingFaceEmbeddings
 
 from langchain.chains import ConversationalRetrievalChain
@@ -14,7 +14,7 @@ os.environ["STREAMLIT_WATCH_FILE_SYSTEM"] = "false"
 
 
 # ✅ Set up LLM
-llm = OllamaLLM(
+llm = Ollama(
     model="llama2",
     temperature=0.7
 )
