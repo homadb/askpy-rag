@@ -3,10 +3,9 @@ import sys
 from dotenv import load_dotenv
 import streamlit as st
 
+from langchain_chroma import Chroma
+from langchain_ollama import Ollama
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
-from langchain.chains import RetrievalQA
-from langchain_ollama import OllamaLLM
 
 from langchain.chains import ConversationalRetrievalChain
 
